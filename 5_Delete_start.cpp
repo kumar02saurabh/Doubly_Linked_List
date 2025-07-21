@@ -33,32 +33,32 @@ int main()
     Node *head = NULL;
 
     // create Array
-    int arr[] = {1, 2, 3, 4, 5};
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
     Node *tail = NULL;
 
-    head = create_DLL(arr, 0, 5, NULL);
+    head = create_DLL(arr, 0, 7, NULL);
 
     // Delete Start
     if (head != NULL)
     {
-        //if only one node exist 
-        if(head->next == NULL)
+        // if only one node exist
+        if (head->next == NULL)
         {
-            delete head;head = NULL;
+            delete head;
+            head = NULL;
         }
-        //if more than one node
+        // if more than one node
         Node *temp = head;
         head = head->next;
         delete temp;
         head->prev = NULL;
     }
 
-
-    //Delete End
-    if(head != NULL)
+    // Delete End
+    if (head != NULL)
     {
-        //if only 1 node available 
-        if(head->next == NULL)
+        // if only 1 node available
+        if (head->next == NULL)
         {
             delete head;
             head = NULL;
@@ -66,15 +66,51 @@ int main()
         else // More than one Node
         {
             Node *curr = head;
-            while(curr->next)
+            while (curr->next)
             {
                 curr = curr->next;
             }
-            curr->prev ->next = NULL;
+            curr->prev->next = NULL;
             delete curr;
         }
     }
 
+    // Delete Start
+    int pos = 3;
+    if (pos == 1)
+    {
+        if (head->next == NULL)
+        {
+            delete head;
+            head = NULL;
+        }
+        // if more than one node
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        head->prev = NULL;
+    }
+    else
+    {
+        Node *curr = head;
+        while (--pos)
+        {
+            curr = curr->next;
+        }
+        // Delete end
+        if (curr->next == NULL)
+        {
+            curr ->prev->next = NULL;
+            delete curr;
+
+        }
+        else
+        {
+            curr ->prev->next = curr->next;
+            curr ->next->prev = curr->prev;
+            delete curr;
+        }
+    }
 
     // print
     Node *traverse = head;
